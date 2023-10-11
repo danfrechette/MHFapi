@@ -47,6 +47,7 @@ def upgrade():
 
     op.create_table('gps',
         sa.Column('gps_id', sa.Integer(), nullable=False, primary_key=True),
+        sa.Column('created_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
         sa.Column('lat', sa.String(),nullable=False),
         sa.Column('lng', sa.String(),nullable=False),
         sa.PrimaryKeyConstraint('gps_id'))
