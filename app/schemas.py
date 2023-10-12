@@ -71,10 +71,8 @@ class Vote(BaseModel):
     dir: conint(le=1)
 
 class GpsOut(BaseModel):
-    id: int
     lat:str
     lng:str
-    created_at: datetime
 
     class Config:
         orm_mode = True

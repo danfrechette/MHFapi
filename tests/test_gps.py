@@ -8,13 +8,9 @@ from app.config import settings
 @pytest.mark.parametrize('lat, lng',[
     ("42.495137", "-83.237855"),
     ("42.481933", "-83.106192"),
-    ("42.819823", "-83.269120")
-])
-
+    ("42.819823", "-83.269120")])
 
 def test_create_gps(client, lat, lng):
     res = client.post("/gps/", json={"lat": lat, "lng": lng})
-
-    new_gps = schemas.UserOut(**res.json())
-    assert new_gps.email == email
+    new_gps = schemas.GpsOut(**res.json())
     assert res.status_code == 201
