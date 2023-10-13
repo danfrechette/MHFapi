@@ -72,6 +72,9 @@ def test_create_multiple_users():
     }]
     print(post_data)
 
+    return create_access_token({"user_id": test_user['id']})
+
+
 # def test_create_user2(client, email, password, fname, lname):
 #     res = client.post("/users/", json={"email": email, "password": password,
 #                                        "fname": fname, "lname":lname})
@@ -82,7 +85,7 @@ def test_create_multiple_users():
 
 @pytest.fixture
 def test_user(client):
-    user_data = {'email':'hello123@gmail.com', 'password':'password123'}
+    user_data = {'email':'JackNimble@gmail.com', 'password':'password123','fname':'Jack', 'lname':'Nimble'}
 
     res = client.post("/users/",json = user_data)
     assert res.status_code == 201
@@ -92,7 +95,7 @@ def test_user(client):
 
 @pytest.fixture
 def test_user2(client):
-    user_data = {'email':'hello456@gmail.com', 'password':'password123'}
+    user_data = {'email':'TomThumb@gmail.com', 'password':'password123','fname':'Tom', 'lname':'Thumb'}
 
     res = client.post("/users/",json = user_data)
     assert res.status_code == 201

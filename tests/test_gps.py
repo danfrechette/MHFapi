@@ -11,6 +11,8 @@ from app.config import settings
     ("42.819823", "-83.269120")])
 
 def test_create_gps(client, lat, lng):
+    print("test_create_gps: " , lat, lng)
     res = client.post("/gps/", json={"lat": lat, "lng": lng})
+
     new_gps = schemas.GpsOut(**res.json())
     assert res.status_code == 201

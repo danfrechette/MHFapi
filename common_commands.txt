@@ -9,3 +9,4 @@ PIP Commands:
 
 PYTEST Commands:
     pytest --disable-warnings -v .\tests\test_users.py
+    pytest --disable-warnings -v -q .\tests\test_users.py

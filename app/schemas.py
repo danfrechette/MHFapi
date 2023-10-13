@@ -50,6 +50,8 @@ class PostOut(BaseModel):
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
+    fname: str
+    lname: str
 
 
 class UserLogin(BaseModel):
@@ -73,6 +75,13 @@ class Vote(BaseModel):
 class GpsOut(BaseModel):
     lat:str
     lng:str
+
+    class Config:
+        orm_mode = True
+
+class ClubsOut(BaseModel):
+    name:str
+    pri_contact:str
 
     class Config:
         orm_mode = True

@@ -7,10 +7,10 @@ from app.database import Base
 class Post(Base):
     __tablename__ = "posts"
     id = Column(Integer, primary_key=True, nullable=False)
+    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     title = Column(String, nullable=False)
     content = Column(String, nullable=False)
     published = Column(Boolean, server_default='TRUE', nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     owner = relationship("User")
 
@@ -35,4 +35,11 @@ class Gps(Base):
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     lat = Column(String, nullable=True)
     lng = Column(String, nullable=True)
+
+class Clubs(Base):
+    __tablename__ = "clubs"
+    club_id = Column(Integer, primary_key=True, nullable=False)
+    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
+    name = Column(String, nullable=False)
+    pri_contact = Column(String, nullable=False)
 
