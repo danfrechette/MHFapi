@@ -48,6 +48,39 @@ def client(session):
 
 
 @pytest.fixture
+def test_create_multiple_users():
+    post_data =[{
+         'email': "DFrechette@gmail.com",
+         'password': "password123",
+         'fname': "Daniel",
+         'lname': "Frechette"
+    },{
+        'email': "TDimwit@gmail.com",
+        'password': "password123",
+        'fname': "Tammy",
+        'lname': "Dimwit"
+    },{
+        'email': "Enewman@gmail.com",
+        'password': "password123",
+        'fname': "Eric",
+        'lname': "Newman"
+    },{
+        'email': "TomCruse@gmail.com",
+        'password': "password123",
+        'fname': "Tom",
+        'lname': "Cruse"
+    }]
+    print(post_data)
+
+# def test_create_user2(client, email, password, fname, lname):
+#     res = client.post("/users/", json={"email": email, "password": password,
+#                                        "fname": fname, "lname":lname})
+
+#     new_user = schemas.UserOut(**res.json())
+#     assert new_user.email == email
+#     assert res.status_code == 201
+
+@pytest.fixture
 def test_user(client):
     user_data = {'email':'hello123@gmail.com', 'password':'password123'}
 
