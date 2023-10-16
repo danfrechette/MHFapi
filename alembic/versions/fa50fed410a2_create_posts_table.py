@@ -15,9 +15,7 @@ down_revision = None
 branch_labels = None
 depends_on = None
 
-
 def upgrade():
-
 
     op.create_table('users',
         sa.Column('id', sa.Integer(), nullable=False, primary_key=True),
@@ -58,28 +56,28 @@ def upgrade():
         sa.Column('name', sa.String(),nullable=False),
         sa.Column('logo', sa.String(),nullable=True),
         sa.Column('email', sa.String(),nullable=False),
-        sa.Column('phone' , sa.String(),nullable=True),
+        sa.Column('pri_contact', sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(['pri_contact'], ['users.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('club_id'))
 
     op.create_table('events',
         sa.Column('event_id', sa.Integer(), nullable=False, primary_key=True),
         sa.Column('created_at', sa.TIMESTAMP(timezone=True), server_default=('now()'), nullable=False),
-        sa.Column('hostedby', sa.String(),nullable=False),
+        sa.Column('hostedby', sa.Integer(),nullable=False),
         sa.Column('title', sa.String(),nullable=True),
         sa.Column('description', sa.String(),nullable=False),
         sa.Column('event_start', sa.TIMESTAMP(timezone=True), nullable=False),
         sa.Column('event_end'  , sa.TIMESTAMP(timezone=True), nullable=True),
         sa.Column('publish', sa.Boolean(), server_default='True', nullable=False),
+        sa.ForeignKeyConstraint(['hostedby'], ['clubs.club_id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('event_id'))
     pass
 
-
-
 def downgrade():
-    op.drop_table('posts')
-    op.drop_table('users')
-    op.drop_table('votes')
     op.drop_table('gps')
-    op.drop_table('clubs')
+    op.drop_table('votes')
+    op.drop_table('posts')
     op.drop_table('events')
+    op.drop_table('clubs')
+    op.drop_table('users')
     pass

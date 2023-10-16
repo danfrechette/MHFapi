@@ -1,8 +1,8 @@
 version: '3'
 services:
   api:
-    image: dfrechette248/fastapi
-    
+    image: dfrechette248/MHFapi
+
     ports:
       - 80:8000
     environment:

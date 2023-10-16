@@ -41,5 +41,8 @@ class Clubs(Base):
     club_id = Column(Integer, primary_key=True, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     name = Column(String, nullable=False)
-    pri_contact = Column(String, nullable=False)
+    logo = Column(String, nullable=False)
+    pri_contact = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    email = Column(String, nullable=False, unique=True)
+
 
