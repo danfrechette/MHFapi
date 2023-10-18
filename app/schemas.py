@@ -28,6 +28,23 @@ class UserOut(BaseModel):
     class Config:
         orm_mode = True
 
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+    fname: str
+    lname: str
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    id: Optional[str] = None
+
 
 class Post(PostBase):
     id: int
@@ -47,41 +64,33 @@ class PostOut(BaseModel):
         orm_mode = True
 
 
-class UserCreate(BaseModel):
-    email: EmailStr
-    password: str
-    fname: str
-    lname: str
-
-
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
-
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-
-class TokenData(BaseModel):
-    id: Optional[str] = None
-
-
 class Vote(BaseModel):
     post_id: int
     dir: conint(le=1)
 
-class GpsOut(BaseModel):
+
+class GpsCreate(BaseModel):
     lat:str
     lng:str
 
     class Config:
         orm_mode = True
 
+class GpsOut(BaseModel):
+    gps_id:str
+    lat:str
+    lng:str
+
+    class Config:
+        orm_mode = True
+
+class ClubsCreate(BaseModel):
+    name: str
+    pri_contact: int
+    email: EmailStr
+
 class ClubsOut(BaseModel):
-    name:str
-    pri_contact:str
+    club_id:int
 
     class Config:
         orm_mode = True

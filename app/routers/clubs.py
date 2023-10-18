@@ -10,10 +10,16 @@ router = APIRouter(
 )
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.ClubsOut)
-def create_clubs(gps: schemas.ClubsOut, db: Session = Depends(get_db)):
-    #hash the Password
-    new_club = models.Gps(**gps.dict())
+def create_clubs(clubs: schemas.ClubsCreate, db: Session = Depends(get_db)):
+    new_club = models.Clubs(**clubs.dict())
     db.add(new_club)
     db.commit()
     db.refresh(new_club)
     return new_club
+
+@router.get('/{id}', status_code=status.HTTP_201_CREATED, response_model=schemas.ClubsOut)
+def get_user(id: int, db: Session = Depends(get_db) ):
+    club = db.query(models.Clubs).filter( models.Clubs.club_id == str(id) ).first()
+    if club == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Club: {id} was not found.")
+    return club
